@@ -1,0 +1,54 @@
+contentpage {
+    background-color: #333847;
+}
+
+button {
+    background-color: #AD8579;
+    color: #472115;
+    border-radius: 20;
+}
+
+frame {
+    padding: 10;
+    background-color: #484C5D;
+    border-radius: 10;
+}
+
+label {
+    text-align: center;
+    color: #FAB5B8;
+    font-size: 20;
+}
+
+verticalStackLayout > * {
+    margin: 0,5;
+}
+
+picker,
+^inputview {
+    margin: 0,3;
+    color: #4A536F;
+    background-color: #d4cfc9;
+}
+
+#AddCollectionPageContent {
+    background-color: #333847;
+    padding-top: 50;
+    border-radius: 0;
+}
+
+#AddCollectionLayout > * {
+    margin: 0,10;
+}
+
+#ItemListFrame {
+    padding: 5,15;
+    background-color: #484C5D;
+}
+
+.customColumnFrame{
+    padding: 0;
+
+}
+
+

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionManager.Views.CollectionSummary"
+             xmlns:models="clr-namespace:CollectionManager.Models"
+             Title="Collection Summary">
+    <ContentPage.Resources>
+        <StyleSheet Source="/Resources/Styles/EditCollectionStyle.css"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <models:CollectionSummaryModel/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <Frame x:Name="EditCollectionContentFrame">
+            <Frame WidthRequest="1100" Padding="10,50,10,10">
+                <StackLayout Orientation="Vertical">
+                    <Label FontSize="Large" Text="{Binding Name}"/>
+                    <Frame StyleClass="innerFrame">
+                        <Grid ColumnDefinitions="*,*">
+                            <StackLayout Orientation="Vertical" Grid.Column="0">
+                                <Label Text="Amount of Items in Collection"/>
+                                <Label Text="{Binding ItemAmount}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" Grid.Column="1">
+                                <Label Text="Amount of Items in Possession"/>
+                                <Label Text="{Binding ItemPossessionAmount}"/>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                    <Frame StyleClass="innerFrame">
+                        <Grid ColumnDefinitions="*,*,*,*,*">
+                            <StackLayout Orientation="Vertical" Grid.Column="0">
+                                <Label Text="New Items"/>
+                                <Label Text="{Binding NewItemAmount}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" Grid.Column="1">
+                                <Label Text="Worn Items"/>
+                                <Label Text="{Binding WornItemAmount}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" Grid.Column="2">
+                                <Label Text="Items For Sale"/>
+                                <Label Text="{Binding ForSaleItemAmount}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" Grid.Column="3">
+                                <Label Text="Sold Items"/>
+                                <Label Text="{Binding SoldItemAmount}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" Grid.Column="4">
+                                <Label Text="Items To Buy"/>
+                                <Label Text="{Binding ToBuyItemAmount}"/>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                    <Frame Padding="0" StyleClass="innerFrame">
+                        <Grid WidthRequest="1100" ColumnDefinitions="*" Padding="0">
+                            <CollectionView Grid.Column="0" x:Name="ratingsView" HeightRequest="100" WidthRequest="720" ItemsLayout="HorizontalGrid" ItemsSource="{Binding Ratings}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Orientation="Vertical" HeightRequest="100" WidthRequest="60" Margin="0" Padding="0">
+                                            <Label Text="{Binding Name}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium"/>
+                                            <Label Text="{Binding Amount}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                    <Frame StyleClass="innerFrame">
+                        <Grid ColumnDefinitions="*,*">
+                            <StackLayout Orientation="Vertical" Grid.Column="0">
+                                <Label Text="Cheapest Item"/>
+                                <Label Text="{Binding CheapestItemName}"/>
+                                <Label Text="{Binding CheapestItemPrice}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical" Grid.Column="1">
+                                <Label Text="Most Expensive Item"/>
+                                <Label Text="{Binding ExpensiveItemName}"/>
+                                <Label Text="{Binding ExpensiveItemPrice}"/>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                    <Button WidthRequest="200" HeightRequest="50" FontSize="Medium" Text="Go Back" Clicked="GoBack_Clicked"/>
+                </StackLayout>
+            </Frame>
+        </Frame>
+    </ScrollView>
+</ContentPage>

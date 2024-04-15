@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionManager.Views.AddCollection"
+             xmlns:models="clr-namespace:CollectionManager.Models"
+             Title="Add New Collection">
+    <ContentPage.Resources>
+        <StyleSheet Source="/Resources/Styles/AddCollectionStyle.css"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <models:CollectionModel/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <Frame x:Name="AddCollectionPageContent">
+            <VerticalStackLayout WidthRequest="1100" x:Name="AddCollectionLayout">
+                <Frame>
+                    <VerticalStackLayout>
+                        <Label Text="Collection Name"/>
+                        <Editor Text="{Binding Name}" HeightRequest="40" WidthRequest="400"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame>
+                    <VerticalStackLayout>
+                        <Button Text="Add Custom Column" Clicked="AddCustomColumn_Clicked" WidthRequest="200" HeightRequest="80"/>
+                        <Frame IsVisible="true">
+                            <StackLayout MaximumHeightRequest="500">
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Padding="50,0">
+                                    <Label Text="Column Name" Grid.Column="0" HeightRequest="30"/>
+                                    <Label Text="Column Value Type" Grid.Column="1" HeightRequest="30"/>
+                                </Grid>
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Padding="50,0">
+                                    <Editor Text="{Binding CurrentCustomColumn.Name}" Grid.Column="0" HeightRequest="30"/>
+                                    <Picker Grid.Column="1" SelectedIndexChanged="ColumnTypeIndex_Changed">
+                                        <Picker.Items>
+                                            <x:String>Text</x:String>
+                                            <x:String>Number</x:String>
+                                            <x:String>List</x:String>
+                                        </Picker.Items>
+                                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                                    </Picker>
+                                </Grid>
+
+                                <VerticalStackLayout x:Name="customSelectLayout" IsVisible="false" WidthRequest="200">
+                                    <Button Text="+" Clicked="AddCustomSelect_Clicked"/>
+                                    <ListView ItemsSource="{Binding SelectItems}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <Editor Text="{Binding Name}" HeightRequest="30"/>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </VerticalStackLayout>
+                                
+                            </StackLayout>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame>
+                    <VerticalStackLayout>
+                        <Button Text="Add Item" Clicked="AddItem_Clicked" WidthRequest="200" HeightRequest="80"/>
+                        <Frame x:Name="ItemListFrame" IsVisible="false">
+                            <ScrollView Orientation="Both" WidthRequest="1000" HorizontalScrollBarVisibility="Always" HorizontalOptions="FillAndExpand" HeightRequest="300">
+                                <ListView ItemsSource="{Binding Items}" x:Name="itemListView" WidthRequest="1000" HeightRequest="300">
+                                    <ListView.Header>
+                                        <FlexLayout Direction="Row" AlignItems="Stretch" JustifyContent="SpaceBetween">
+                                            <Label x:Name="nameLabel" Margin="0" WidthRequest="100" Text="Name" FontSize="20" HeightRequest="30" TextColor="#FAB5B8" HorizontalTextAlignment="Center"/>
+                                            <Label WidthRequest="100" Margin="0" Text="Comment" FontSize="20" HeightRequest="30" TextColor="#FAB5B8" HorizontalTextAlignment="Center"/>
+                                            <Label WidthRequest="100" Margin="0" Text="Price" FontSize="20" HeightRequest="30" TextColor="#FAB5B8" HorizontalTextAlignment="Center"/>
+                                            <Label WidthRequest="100" Margin="0" Text="Rating" FontSize="20" HeightRequest="30" TextColor="#FAB5B8" HorizontalTextAlignment="Center"/>
+                                            <Label WidthRequest="100" Margin="0" Text="Status" FontSize="20" HeightRequest="30" TextColor="#FAB5B8" HorizontalTextAlignment="Center"/>
+                                            <CollectionView x:Name="columnNamesView" ItemsSource="{Binding UserColumnNames}">
+                                                <CollectionView.ItemsLayout>
+                                                    <GridItemsLayout Orientation="Horizontal"/>
+                                                </CollectionView.ItemsLayout>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid MinimumWidthRequest="100" WidthRequest="100" Padding="0">
+                                                            <Label WidthRequest="100" VerticalTextAlignment="Center" Margin="0,0,0,15" HeightRequest="30" FontSize="20" Text="{Binding Name}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </FlexLayout>
+                                    </ListView.Header>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <FlexLayout Direction="Row" AlignItems="Stretch" JustifyContent="SpaceBetween" HeightRequest="50">
+                                                    <Editor WidthRequest="80" HeightRequest="30" Margin="10" x:Name="nameEditor" Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+                                                    <Editor WidthRequest="80" HeightRequest="30" Margin="10" Text="{Binding Comment}" HorizontalTextAlignment="Center"/>
+                                                    <Editor TextChanged="ItemPriceText_Changed" WidthRequest="80" HeightRequest="30" Margin="10" Text="{Binding Price}" HorizontalTextAlignment="Center"/>
+                                                    <Picker WidthRequest="80" HeightRequest="30" Margin="5,10" SelectedIndex="{Binding Rating}">
+                                                        <Picker.Items>
+                                                            <x:String>0</x:String>
+                                                            <x:String>1</x:String>
+                                                            <x:String>2</x:String>
+                                                            <x:String>3</x:String>
+                                                            <x:String>4</x:String>
+                                                            <x:String>5</x:String>
+                                                            <x:String>6</x:String>
+                                                            <x:String>7</x:String>
+                                                            <x:String>8</x:String>
+                                                            <x:String>9</x:String>
+                                                            <x:String>10</x:String>
+                                                        </Picker.Items>
+                                                    </Picker>
+                                                    <Picker WidthRequest="80" HeightRequest="30" Margin="5,10" SelectedIndex="{Binding Status}">
+                                                        <Picker.Items>
+                                                            <x:String>New</x:String>
+                                                            <x:String>Worn</x:String>
+                                                            <x:String>ForSale</x:String>
+                                                            <x:String>Sold</x:String>
+                                                            <x:String>ToBuy</x:String>
+                                                        </Picker.Items>
+                                                    </Picker>
+                                                    <CollectionView HeightRequest="50" Margin="0" ItemsSource="{Binding UserColumns}">
+                                                        <CollectionView.ItemsLayout>
+                                                            <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="10"/>
+                                                        </CollectionView.ItemsLayout>
+                                                        <CollectionView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid WidthRequest="80" Margin="0" Padding="0" HeightRequest="30" StyleClass="customColumnFrame" Loaded="CustomColumnInput_Loaded">
+                                                                    <Label Grid.Row="0" Grid.Column="0" HeightRequest="100" WidthRequest="100"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </CollectionView.ItemTemplate>
+                                                    </CollectionView>
+                                                </FlexLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </ScrollView>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Grid ColumnDefinitions="*,*" WidthRequest="800" ColumnSpacing="50">
+                    <Button Text="Add Collection" Clicked="AddCollection_Clicked" Grid.Column="0" HeightRequest="50"/>
+                    <Button Text="Cancel" Clicked="CancelButton_Clicked" Grid.Column="1" HeightRequest="50"/>
+                </Grid>
+            </VerticalStackLayout>
+        </Frame>
+    </ScrollView>
+</ContentPage>

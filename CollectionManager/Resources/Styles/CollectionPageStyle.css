@@ -1,0 +1,42 @@
+button {
+    background-color: #AD8579;
+    color: #472115;
+    border-radius: 20;
+}
+
+label {
+    text-align: center;
+    color: #FAB5B8;
+}
+
+grid label {
+    color: #FAB5B8;
+    font-size: 15;
+}
+
+checkBox {
+    color: #018176;
+}
+
+
+#CollectionPageContentFrame {
+    background-color: #333847;
+    padding-top: 50;
+    border-radius: 0;
+}
+
+#CollectionPageLayout > * {
+    margin: 0,10;
+}
+
+#CollectionPageLayout > frame {
+    background-color: #484C5D;
+    border-radius: 10;
+}
+
+#ItemListFrame {
+    background-color: #4F5364;
+    border-radius: 10;
+}
+
+

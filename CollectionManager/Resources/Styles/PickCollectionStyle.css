@@ -1,0 +1,30 @@
+contentpage {
+    background-color: #333847;
+}
+
+#pageContent {
+    background-color: #333847;
+}
+
+#headerFrame{
+    background-color:transparent;
+}
+
+#headerFrame button {
+    background-color: #AD8579;
+    color: #472115;
+    border-radius: 20;
+}
+
+#classListFrame {
+    background-color: #484C5D;
+    color: #FAB5B8;
+    border-radius: 20;
+    border-color: transparent;
+}
+
+.collectionFrameClass {
+    background-color: #4F5364;
+    border-radius: 20;
+    border-color: transparent;
+}

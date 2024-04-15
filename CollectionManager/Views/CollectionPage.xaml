@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionManager.Views.CollectionPage"
+             xmlns:models="clr-namespace:CollectionManager.Models"
+             Title="Collection Page">
+    <ContentPage.Resources>
+        <StyleSheet Source="/Resources/Styles/CollectionPageStyle.css"/>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <models:CollectionModel/>
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <Frame x:Name="CollectionPageContentFrame">
+            <VerticalStackLayout WidthRequest="1200" x:Name="CollectionPageLayout">
+                <Frame WidthRequest="1200">
+                    <Grid ColumnDefinitions="*,6*,2*,1*,2*">
+                        <Button Text="←" Clicked="BackButton_Clicked" WidthRequest="100" HeightRequest="50" 
+                                FontSize="30" HorizontalOptions="Start" Grid.Column="0"/>
+
+                        <Button Grid.Column="2" Text="Collection Summary" Clicked="CollectionSummary_Clicked"/>
+
+                        <Button Grid.Column="4" Text="Add New Item" Clicked="AddNewItem_Clicked"/>
+                    </Grid>
+                </Frame>
+                <Frame WidthRequest="1200">
+                    <VerticalStackLayout WidthRequest="1100">
+                        <Frame x:Name="ItemListFrame" IsVisible="true">
+                            <ScrollView Orientation="Both" WidthRequest="1100" HorizontalScrollBarVisibility="Always" HorizontalOptions="FillAndExpand" HeightRequest="300">
+                                <ListView ItemsSource="{Binding Items}" x:Name="itemListView" WidthRequest="1100" HeightRequest="300" >
+                                    <ListView.Header>
+                                        <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Stretch">
+                                            <Label x:Name="nameLabel" WidthRequest="100" Text="Name" FontSize="20" HeightRequest="30" TextColor="#FAB5B8" HorizontalTextAlignment="Center"/>
+                                            <Label WidthRequest="100" Text="Comment" FontSize="20" HeightRequest="30" TextColor="#FAB5B8" HorizontalTextAlignment="Center"/>
+                                            <Label WidthRequest="100" Text="Price" FontSize="20" HeightRequest="30" TextColor="#FAB5B8" HorizontalTextAlignment="Center"/>
+                                            <Label WidthRequest="100" Text="Rating" FontSize="20" HeightRequest="30" TextColor="#FAB5B8" HorizontalTextAlignment="Center"/>
+                                            <Label WidthRequest="100" Text="Status" FontSize="20" HeightRequest="30" TextColor="#FAB5B8" HorizontalTextAlignment="Center"/>
+                                            <CollectionView ItemsSource="{Binding UserColumnNames}">
+                                                <CollectionView.ItemsLayout>
+                                                    <LinearItemsLayout Orientation="Horizontal"/>
+                                                </CollectionView.ItemsLayout>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Label WidthRequest="100" HeightRequest="30" FontSize="20" Text="{Binding Name}"/>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                            <Label WidthRequest="50"/>
+                                            <Label WidthRequest="50" Margin="0,0,10,0"/>
+                                        </FlexLayout>
+                                    </ListView.Header>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Stretch" Loaded="ItemLayout_Loaded">
+
+                                                    <Label WidthRequest="100" x:Name="nameEditor" Text="{Binding Name}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                                    <Label WidthRequest="100" Text="{Binding Comment}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                                    <Label WidthRequest="100" Text="{Binding Price}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                                    <Label WidthRequest="100" Text="{Binding Rating}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Loaded="ItemRating_Loaded"/>
+                                                    <Label WidthRequest="100" Text="{Binding Status}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Loaded="ItemStatus_Loaded"/>
+                                                    <CollectionView ItemsSource="{Binding UserColumns}">
+                                                        <CollectionView.ItemsLayout>
+                                                            <GridItemsLayout Orientation="Horizontal"/>
+                                                        </CollectionView.ItemsLayout>
+                                                        <CollectionView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Label WidthRequest="100" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{Binding Value}" Loaded="CustomColumn_Loaded"/>
+                                                            </DataTemplate>
+                                                        </CollectionView.ItemTemplate>
+                                                    </CollectionView>
+                                                    <Button WidthRequest="50" Text="Edit" Clicked="ItemEdit_Clicked"/>
+                                                    <Button WidthRequest="50" Text="X" Clicked="ItemDelete_Clicked" Margin="0,0,10,0"/>
+                                                </FlexLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </ScrollView>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </Frame>
+    </ScrollView>
+</ContentPage>

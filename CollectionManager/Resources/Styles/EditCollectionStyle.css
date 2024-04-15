@@ -1,0 +1,56 @@
+contentpage {
+    background-color: #333847;
+}
+
+button {
+    background-color: #AD8579;
+    color: #472115;
+    border-radius: 20;
+}
+
+frame {
+    padding: 10;
+    background-color: #484C5D;
+    border-radius: 10;
+}
+
+label {
+    text-align: center;
+    -maui-vertical-text-alignment: center;
+    color:wheat;
+    font-size: 20;
+}
+
+grid {
+    padding:50,0;
+}
+
+grid>button{
+    border-radius:5;
+}
+
+^stackbase {
+    padding: 10;
+    margin: 10;
+    -maui-spacing:20;
+}
+
+^inputview {
+    margin: 0,2;
+    color: #4A536F;
+    background-color: #d4cfc9;
+}
+
+#EditCollectionContentFrame {
+    background-color: #333847;
+    padding-top: 50;
+    border-radius: 0;
+}
+
+.innerFrame {
+    padding: 10;
+    background-color: #4F5364;
+    border-radius: 10;
+}
+
+

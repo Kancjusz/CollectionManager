@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectionManager.Views.EditItem"
+             xmlns:models="clr-namespace:CollectionManager.Models"
+             Title="Edit Item">
+    <ContentPage.BindingContext>
+        <models:ItemModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <StyleSheet Source="/Resources/Styles/EditCollectionStyle.css"/>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Frame x:Name="EditCollectionContentFrame">
+            <StackLayout Orientation="Vertical" WidthRequest="900">
+                <Frame>
+                    <ScrollView MaximumHeightRequest="600">
+                        <StackLayout Orientation="Vertical">
+
+                            <Label Text="Name" HorizontalTextAlignment="Center"/>
+                            <Editor WidthRequest="300" HeightRequest="50" Text="{Binding Name}" HorizontalTextAlignment="Center"/>
+
+                            <Label Text="Comment" HorizontalTextAlignment="Center"/>
+                            <Editor WidthRequest="300" HeightRequest="50" Text="{Binding Comment}" HorizontalTextAlignment="Center"/>
+
+                            <Label Text="Price" HorizontalTextAlignment="Center"/>
+                            <Editor TextChanged="ItemPriceText_Changed" WidthRequest="300" HeightRequest="50" Text="{Binding Price}" HorizontalTextAlignment="Center"/>
+
+
+                            <Label Text="Rating" HorizontalTextAlignment="Center"/>
+                            <Picker WidthRequest="300" HeightRequest="50" SelectedIndex="{Binding Rating}">
+                                <Picker.Items>
+                                    <x:String>0</x:String>
+                                    <x:String>1</x:String>
+                                    <x:String>2</x:String>
+                                    <x:String>3</x:String>
+                                    <x:String>4</x:String>
+                                    <x:String>5</x:String>
+                                    <x:String>6</x:String>
+                                    <x:String>7</x:String>
+                                    <x:String>8</x:String>
+                                    <x:String>9</x:String>
+                                    <x:String>10</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <Label Text="Status" HorizontalTextAlignment="Center"/>
+                            <Picker WidthRequest="300" HeightRequest="50" SelectedIndex="{Binding Status}">
+                                <Picker.Items>
+                                    <x:String>New</x:String>
+                                    <x:String>Worn</x:String>
+                                    <x:String>ForSale</x:String>
+                                    <x:String>Sold</x:String>
+                                    <x:String>ToBuy</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <ListView x:Name="customColumnsView" ItemsSource="{Binding UserColumns}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout Orientation="Vertical">
+                                                <Label WidthRequest="100" HorizontalTextAlignment="Center" Text="{Binding Name}"/>
+                                                <Grid WidthRequest="300" HeightRequest="50" StyleClass="customColumnFrame" Loaded="CustomColumnInput_Loaded">
+                                                    <Label Grid.Row="0" Grid.Column="0" HeightRequest="1000" WidthRequest="1000"/>
+                                                </Grid>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </ScrollView>
+                </Frame>
+                <Frame>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                        <Button Text="Edit Item" Clicked="EditItem_Clicked" HeightRequest="50" WidthRequest="100"/>
+                        <Button Text="Cancel" Clicked="CancelButton_Clicked" HeightRequest="50" WidthRequest="100"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
+    </ScrollView>
+</ContentPage>
